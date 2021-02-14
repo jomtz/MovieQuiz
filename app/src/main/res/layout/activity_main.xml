@@ -35,6 +35,13 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/answer_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/answer_button"/>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

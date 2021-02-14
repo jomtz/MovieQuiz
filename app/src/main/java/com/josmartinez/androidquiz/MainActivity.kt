@@ -20,13 +20,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var falseButton: Button
     private lateinit var nextButton: ImageButton
     private lateinit var previousButton: ImageButton
+    private lateinit var answerButton: ImageButton
     private lateinit var questionTextView: TextView
 
     private val quizViewModel: QuizViewModel by lazy {
         ViewModelProvider(this).get(QuizViewModel::class.java)
     }
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         falseButton = findViewById(R.id.false_button)
         nextButton = findViewById(R.id.next_button)
         previousButton = findViewById(R.id.previous_button)
+        answerButton = findViewById(R.id.answer_button)
         questionTextView = findViewById(R.id.question_text_view)
 
 
@@ -60,6 +60,10 @@ class MainActivity : AppCompatActivity() {
         previousButton.setOnClickListener {
             quizViewModel.moveToBefore()
             updateQuestion()
+        }
+
+        answerButton.setOnClickListener {
+            
         }
 
         questionTextView.setOnClickListener {
