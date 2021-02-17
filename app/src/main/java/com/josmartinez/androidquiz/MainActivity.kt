@@ -2,7 +2,6 @@ package com.josmartinez.androidquiz
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -13,6 +12,8 @@ import androidx.lifecycle.ViewModelProvider
 
 private const val TAG = "MainActivity"
 private const val KEY_INDEX = "index"
+private const val REQUEST_CODE_ANSWER = 0
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var falseButton: Button
     private lateinit var nextButton: ImageButton
     private lateinit var previousButton: ImageButton
-    private lateinit var answerButton: ImageButton
+    private lateinit var answerButton: Button
     private lateinit var questionTextView: TextView
 
     private val quizViewModel: QuizViewModel by lazy {
@@ -63,7 +64,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         answerButton.setOnClickListener {
-            
+            val answerIsTrue = quizViewModel.currentQuestionAnswer
+            val intent = AnswerActivity.newIntent(this@MainActivity, answerIsTrue)
+            startActivityForResult(intent, REQUEST_CODE_ANSWER)
         }
 
         questionTextView.setOnClickListener {
@@ -116,13 +119,22 @@ class MainActivity : AppCompatActivity() {
     private fun checkAnswer(userAnswer: Boolean) {
         val correctAnswer = quizViewModel.currentQuestionAnswer
 
-        val messageResId = if (userAnswer == correctAnswer){
-            R.string.correct_toast
-        } else {
-            R.string.incorrect_toast
+        val messageResId = when {
+            quizViewModel.isAnswered -> R.string.informative_toast
+            userAnswer == correctAnswer -> R.string.correct_toast
+            else -> R.string.incorrect_toast
         }
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT)
             .show()
     }
+
+
+
+
+
+
+
+
+
 
 }
