@@ -1,5 +1,7 @@
 package com.josmartinez.androidquiz
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -77,6 +79,20 @@ class MainActivity : AppCompatActivity() {
         updateQuestion()
 
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode != Activity.RESULT_OK){
+            return
+        }
+        if (resultCode == REQUEST_CODE_ANSWER){
+            quizViewModel.isAnswered =
+                data?.getBooleanExtra(EXTRA_ANSWER_SHOWN, false) ?: false
+        }
+
+    }
+
 
     override fun onStart() {
         super.onStart()
