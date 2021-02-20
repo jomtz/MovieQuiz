@@ -11,7 +11,7 @@ import android.widget.TextView
 const val EXTRA_ANSWER_SHOWN = "com.josmartinez.androidquiz.answer_shown"
 private const val EXTRA_ANSWER_IS_TRUE = "com.josmartinez.androidquiz.answer_is_true"
 
-class AnswerActivity : AppCompatActivity() {
+class MixActivity : AppCompatActivity() {
 
     private lateinit var answerTextView: TextView
     private lateinit var showAnswerButton: Button
@@ -20,7 +20,7 @@ class AnswerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_answer)
+        setContentView(R.layout.activity_mix)
 
         answerIsTrue = intent.getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false)
         answerTextView = findViewById(R.id.answer_text_view)
@@ -45,7 +45,7 @@ class AnswerActivity : AppCompatActivity() {
 
     companion object {
         fun newIntent(packageContext: Context, answerIsTrue: Boolean): Intent{
-            return Intent(packageContext, AnswerActivity::class.java)
+            return Intent(packageContext, MixActivity::class.java)
                 .apply { putExtra(EXTRA_ANSWER_IS_TRUE, answerIsTrue) }
         }
     }
