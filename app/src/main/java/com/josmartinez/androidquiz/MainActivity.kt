@@ -2,14 +2,13 @@ package com.josmartinez.androidquiz
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 
 private const val TAG = "MainActivity"
@@ -19,11 +18,9 @@ private const val REQUEST_CODE_ANSWER = 0
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var trueButton: Button
-    private lateinit var falseButton: Button
-    private lateinit var nextButton: ImageButton
-    private lateinit var previousButton: ImageButton
-    private lateinit var answerButton: Button
+    private lateinit var trueButton: ImageButton
+    private lateinit var falseButton: ImageButton
+    private lateinit var playAgainButton: Button
     private lateinit var questionTextView: TextView
 
     private val quizViewModel: QuizViewModel by lazy {
@@ -41,33 +38,22 @@ class MainActivity : AppCompatActivity() {
 
         trueButton = findViewById(R.id.true_button)
         falseButton = findViewById(R.id.false_button)
-        nextButton = findViewById(R.id.next_button)
-        previousButton = findViewById(R.id.previous_button)
-        answerButton = findViewById(R.id.answer_button)
+        playAgainButton = findViewById(R.id.play_again_button)
         questionTextView = findViewById(R.id.question_text_view)
 
 
-        trueButton.setOnClickListener{ view: View ->
+        trueButton.setOnClickListener{
             checkAnswer(true)
         }
 
-        falseButton.setOnClickListener { view: View ->
+        falseButton.setOnClickListener {
             checkAnswer(false)
         }
 
-        nextButton.setOnClickListener {
-            quizViewModel.moveToNext()
-            updateQuestion()
-        }
 
-        previousButton.setOnClickListener {
-            quizViewModel.moveToBefore()
-            updateQuestion()
-        }
-
-        answerButton.setOnClickListener {
+        playAgainButton.setOnClickListener {
             val answerIsTrue = quizViewModel.currentQuestionAnswer
-            val intent = AnswerActivity.newIntent(this@MainActivity, answerIsTrue)
+            val intent = MixActivity.newIntent(this@MainActivity, answerIsTrue)
             startActivityForResult(intent, REQUEST_CODE_ANSWER)
         }
 
@@ -135,13 +121,14 @@ class MainActivity : AppCompatActivity() {
     private fun checkAnswer(userAnswer: Boolean) {
         val correctAnswer = quizViewModel.currentQuestionAnswer
 
-        val messageResId = when {
-            quizViewModel.isAnswered -> R.string.informative_toast
-            userAnswer == correctAnswer -> R.string.correct_toast
-            else -> R.string.incorrect_toast
-        }
+        val messageResId = if (userAnswer == correctAnswer) R.string.correct_toast
+        else R.string.incorrect_toast
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT)
             .show()
+
+        quizViewModel.moveToNext()
+        updateQuestion()
+
     }
 
 
