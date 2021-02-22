@@ -11,20 +11,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="24dp"
-        android:text="@string/warning_text"/>
-
-    <TextView
-        android:id="@+id/answer_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="24dp"
-        tools:text="Answer"/>
+        android:text="@string/informative_text"/>
 
     <Button
         android:id="@+id/show_answer_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/show_answer_button"/>
+        android:text="@string/mix_button"/>
 
 
 

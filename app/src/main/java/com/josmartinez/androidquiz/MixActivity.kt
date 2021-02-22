@@ -6,14 +6,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TextView
 
 const val EXTRA_ANSWER_SHOWN = "com.josmartinez.androidquiz.answer_shown"
 private const val EXTRA_ANSWER_IS_TRUE = "com.josmartinez.androidquiz.answer_is_true"
 
 class MixActivity : AppCompatActivity() {
 
-    private lateinit var answerTextView: TextView
     private lateinit var showAnswerButton: Button
 
     private var answerIsTrue = false
@@ -23,22 +21,19 @@ class MixActivity : AppCompatActivity() {
         setContentView(R.layout.activity_mix)
 
         answerIsTrue = intent.getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false)
-        answerTextView = findViewById(R.id.answer_text_view)
         showAnswerButton = findViewById(R.id.show_answer_button)
         showAnswerButton.setOnClickListener {
-            val answerText = when{
+            when{
                 answerIsTrue -> R.string.true_button
                 else -> R.string.false_button
             }
-            answerTextView.setText(answerText)
-            setAnswerShownResult(true)
+            setAnswerShownResult()
         }
     }
 
 
-    private fun setAnswerShownResult(isAnswerShown: Boolean) {
+    private fun setAnswerShownResult() {
         val data = Intent().apply {
-            putExtra(EXTRA_ANSWER_SHOWN, isAnswerShown)
         }
         setResult(Activity.RESULT_OK, data)
     }
