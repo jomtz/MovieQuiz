@@ -9,12 +9,21 @@
 
 
     <!-- Questions-->
-    <string name="question_kotlin">Kotlin was first implemented on 2017?</string>
-    <string name="question_oceans">The pacific ocean is larger than the Atlantic Ocean?</string>
-    <string name="question_mideast">The Suez Canal connects the Red Sea and the Indian Ocean?</string>
-    <string name="question_africa">The source of the Nile River is in Egypt?</string>
-    <string name="question_americas">The Amazon river is the longest river in the Americas?</string>
-    <string name="question_asia">Lake Baikal is the world\'s oldest and deepest freshwater lake?</string>
+    <string name="question_number_one">True or False: The nickname of Morgan Freeman\'s character in "Million Dollar Baby" is Red.</string>
+    <string name="question_number_two">True or False: Elizabeth Taylor married the same man twice.</string>
+    <string name="question_number_three">True or False: "The Sandlot" was released in 1993.</string>
+    <string name="question_number_four">True or False: "Moonlight" won Best Picture in 2018.</string>
+    <string name="question_number_five">True or False: Molly Ringwald made four movies with director John Hughes.</string>
+    <string name="question_number_six">True or False: Julia Roberts was married to Kiefer Sutherland.</string>
+    <string name="question_number_seven">True or False: Val Kilmer was offered the role of Johnny in the movie "Dirty Dancing."</string>
+    <string name="question_number_eight">True or False: Meg Ryan played Tom Cruise\'s love interest in the movie "Top Gun."</string>
+    <string name="question_number_nine">True or False: It took 7 hours to do Zoe Saldana\'s Gamora make up for "Guardians of the Galaxy."</string>
+    <string name="question_number_ten">True or False: "Jaws" was originally released in the summer of 1975.</string>
+    <string name="question_number_eleven">True or False: Mindy Kaling played Mrs. Whatsit in the movie "A Wrinkle In Time."</string>
+    <string name="question_number_twelve">True or False: "Snow White and the Seven Dwarfs" was the first feature-length animated film ever released.</string>
+    <string name="question_number_thirteen">True or False: Steven Spielberg won his first Oscar for Best Director for "Schindler\'s List."</string>
+    <string name="question_number_fourteen">True or False: Ian McKellen is the only actor to receive an Oscar nomination for acting in a "Lord of the Rings" movie.</string>
+
 
 
     <string name="play_again_button">Play Again</string>
