@@ -1,4 +1,4 @@
-package com.josmartinez.androidquiz
+package com.josmartinez.moviequiz
 
 import androidx.annotation.StringRes
 
