@@ -1,14 +1,13 @@
 package com.josmartinez.androidquiz
 
 import androidx.lifecycle.ViewModel
+import kotlin.random.Random
 
 private const val TAG = "QuizViewModel"
 
 class QuizViewModel : ViewModel() {
 
     var currentIndex = 0
-    var isAnswered = false
-
 
     private val questionBank = listOf(
         Question(R.string.question_kotlin, true),
@@ -26,7 +25,7 @@ class QuizViewModel : ViewModel() {
         currentIndex = (currentIndex + 1) % questionBank.size
     }
 
-    fun moveToBefore() {
-        currentIndex = (currentIndex - 1) % questionBank.size
-    }
+
 }
+
+

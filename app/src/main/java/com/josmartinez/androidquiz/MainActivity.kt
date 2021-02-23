@@ -1,27 +1,33 @@
 package com.josmartinez.androidquiz
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 
 private const val TAG = "MainActivity"
 private const val KEY_INDEX = "index"
-private const val REQUEST_CODE_ANSWER = 0
 
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var firstEmptyHeart: ImageView
+    private lateinit var firstFullHeart: ImageView
+
+    private lateinit var secondEmptyHeart: ImageView
+    private lateinit var secondFullHeart: ImageView
+
+    private lateinit var lastEmptyHeart: ImageView
+    private lateinit var lastFullHeart: ImageView
 
     private lateinit var trueButton: ImageButton
     private lateinit var falseButton: ImageButton
     private lateinit var playAgainButton: Button
     private lateinit var questionTextView: TextView
+
+    private var oneHeart: Int = 0
 
     private val quizViewModel: QuizViewModel by lazy {
         ViewModelProvider(this).get(QuizViewModel::class.java)
@@ -32,9 +38,15 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "onCreate(Bundle?) called")
         setContentView(R.layout.activity_main)
 
-        val currentIndex =  savedInstanceState?.getInt(KEY_INDEX, 0) ?: 0
+        val currentIndex = savedInstanceState?.getInt(KEY_INDEX, 0) ?: 0
         quizViewModel.currentIndex = currentIndex
 
+        firstEmptyHeart = findViewById(R.id.first_empty_heart)
+        firstFullHeart = findViewById(R.id.first_full_heart)
+        secondEmptyHeart = findViewById(R.id.second_empty_heart)
+        secondFullHeart = findViewById(R.id.second_full_heart)
+        lastEmptyHeart = findViewById(R.id.last_empty_heart)
+        lastFullHeart = findViewById(R.id.last_full_heart)
 
         trueButton = findViewById(R.id.true_button)
         falseButton = findViewById(R.id.false_button)
@@ -42,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         questionTextView = findViewById(R.id.question_text_view)
 
 
-        trueButton.setOnClickListener{
+        trueButton.setOnClickListener {
             checkAnswer(true)
         }
 
@@ -50,32 +62,18 @@ class MainActivity : AppCompatActivity() {
             checkAnswer(false)
         }
 
-
-        playAgainButton.setOnClickListener {
-            val answerIsTrue = quizViewModel.currentQuestionAnswer
-            val intent = MixActivity.newIntent(this@MainActivity, answerIsTrue)
-            startActivityForResult(intent, REQUEST_CODE_ANSWER)
-        }
-
+        //Update to Next Question when is QuestionText is clicked
         questionTextView.setOnClickListener {
             quizViewModel.moveToNext()
             updateQuestion()
         }
 
+        playAgainButton.setOnClickListener {
+            val intent = Intent(this@MainActivity, MixActivity::class.java)
+            startActivity(intent)
+        }
+
         updateQuestion()
-
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (resultCode != Activity.RESULT_OK){
-            return
-        }
-        if (resultCode == REQUEST_CODE_ANSWER){
-            quizViewModel.isAnswered =
-                data?.getBooleanExtra(EXTRA_ANSWER_SHOWN, false) ?: false
-        }
 
     }
 
@@ -112,7 +110,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
     private fun updateQuestion() {
         val questionTextResId = quizViewModel.currentQuestionText
         questionTextView.setText(questionTextResId)
@@ -121,23 +118,50 @@ class MainActivity : AppCompatActivity() {
     private fun checkAnswer(userAnswer: Boolean) {
         val correctAnswer = quizViewModel.currentQuestionAnswer
 
-        val messageResId = if (userAnswer == correctAnswer) R.string.correct_toast
-        else R.string.incorrect_toast
-        Toast.makeText(this, messageResId, Toast.LENGTH_SHORT)
-            .show()
-
+        if (userAnswer == correctAnswer){
+            Toast.makeText(this, R.string.correct_toast, Toast.LENGTH_SHORT).show()
+        }
+        else {
+            oneHeart = (oneHeart + 1)
+            removeHeart(oneHeart)
+        }
         quizViewModel.moveToNext()
         updateQuestion()
 
     }
 
 
+    private fun removeHeart(currentHeart: Int) {
+        val loseHeart = oneHeart
+        when (loseHeart == currentHeart) {
+            loseHeart == 1 -> firstIncorrect()
+            loseHeart == 2 -> secondIncorrect()
+            loseHeart == 3 -> thirdIncorrect()
+            loseHeart == 4 -> fourthIncorrect()
+        }
+    }
 
 
+    private fun firstIncorrect() {
+        firstFullHeart.visibility = ImageView.GONE
+        firstEmptyHeart.visibility = ImageView.VISIBLE
+    }
 
+    private fun secondIncorrect() {
+        secondFullHeart.visibility = ImageView.GONE
+        secondEmptyHeart.visibility = ImageView.VISIBLE
+    }
 
+    private fun thirdIncorrect() {
+        lastFullHeart.visibility = ImageView.GONE
+        lastEmptyHeart.visibility = ImageView.VISIBLE
+    }
 
-
+    private fun fourthIncorrect() {
+        val intent = Intent(this@MainActivity, MixActivity::class.java)
+        startActivity(intent)
+    }
 
 
 }
+

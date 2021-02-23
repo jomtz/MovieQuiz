@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#a3c6f0"
+    android:background="@color/blue_200"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -11,27 +11,57 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="right"
-        android:padding="8dp"
         android:orientation="horizontal"
+        android:padding="8dp"
         tools:ignore="RtlHardcoded">
 
 
         <ImageView
+            android:id="@+id/first_empty_heart"
             android:layout_width="36dp"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_shortcut_empty_heart"
+            android:visibility="gone"
             tools:ignore="ContentDescription" />
 
         <ImageView
+            android:id="@+id/first_full_heart"
             android:layout_width="36dp"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_shortcut_full_heart"
+            android:visibility="visible"
             tools:ignore="ContentDescription" />
 
         <ImageView
+            android:id="@+id/second_empty_heart"
+            android:layout_width="36dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_shortcut_empty_heart"
+            android:visibility="gone"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/second_full_heart"
             android:layout_width="36dp"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_shortcut_full_heart"
+            android:visibility="visible"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/last_empty_heart"
+            android:layout_width="36dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_shortcut_empty_heart"
+            android:visibility="gone"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/last_full_heart"
+            android:layout_width="36dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_shortcut_full_heart"
+            android:visibility="visible"
             tools:ignore="ContentDescription" />
 
     </LinearLayout>
@@ -79,8 +109,11 @@
         android:id="@+id/play_again_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="@string/play_again_button" />
+        android:layout_margin="24dp"
+        android:backgroundTint="@color/orange_400"
+        android:text="@string/play_again_button"
+        android:textColor="@color/blue_50"
+        android:textSize="16sp" />
 
 
 </LinearLayout>
