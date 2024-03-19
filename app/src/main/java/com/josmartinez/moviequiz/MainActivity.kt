@@ -134,10 +134,11 @@ class MainActivity : AppCompatActivity() {
     private fun removeHeart(currentHeart: Int) {
         val loseHeart = oneHeart
         when (loseHeart == currentHeart) {
-            loseHeart == 1 -> firstIncorrect()
-            loseHeart == 2 -> secondIncorrect()
-            loseHeart == 3 -> thirdIncorrect()
-            loseHeart == 4 -> fourthIncorrect()
+            (loseHeart == 1) -> firstIncorrect()
+            (loseHeart == 2) -> secondIncorrect()
+            (loseHeart == 3) -> thirdIncorrect()
+            (loseHeart == 4) -> fourthIncorrect()
+            else -> {}
         }
     }
 
