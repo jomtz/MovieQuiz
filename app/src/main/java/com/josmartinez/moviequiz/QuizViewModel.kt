@@ -22,11 +22,14 @@ class QuizViewModel : ViewModel() {
         Question(R.string.question_number_eleven, false),
         Question(R.string.question_number_twelve, true),
         Question(R.string.question_number_thirteen, true),
-        Question(R.string.question_number_fourteen, true))
+        Question(R.string.question_number_fourteen, true)
+    )
 
-    val currentQuestionAnswer: Boolean get() = questionBank[currentIndex].answer
+    val currentQuestionAnswer: Boolean
+        get() = questionBank[currentIndex].answer
 
-    val currentQuestionText: Int get() = questionBank[currentIndex].textResId
+    val currentQuestionText: Int
+        get() = questionBank[currentIndex].textResId
 
     fun moveToNext() {
         currentIndex = (currentIndex + 1) % questionBank.size

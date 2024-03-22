@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     private var oneHeart: Int = 0
 
     private val quizViewModel: QuizViewModel by lazy {
-        ViewModelProvider(this).get(QuizViewModel::class.java)
+        ViewModelProvider(this)[QuizViewModel::class.java]
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

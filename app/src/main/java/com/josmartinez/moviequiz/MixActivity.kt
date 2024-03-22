@@ -10,7 +10,6 @@ class MixActivity : AppCompatActivity() {
 
     private lateinit var playBackButton: Button
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mix)
